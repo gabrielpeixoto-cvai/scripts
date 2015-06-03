@@ -1,0 +1,20 @@
+Config {  font = "xft:Bitstream Vera Sans Mono:size=9:bold:antialias=true"
+        , bgColor   =   "black"
+        , fgColor   =   "green"
+        , position  =   Top
+        , commands  =   [ Run MultiCpu ["-t", "Cpu: <total0>%|<total1>%|<total2>%|<total3>%|<total4>%|<total5>%|<total6>%|<total7>%"
+            , "-L", "3", "-H", "80", "--normal", "green", "--high", "red"] 10
+        , Run Network "enp6s0" ["-L", "0", "-H", "70", "--normal", "green"
+            , "--high", "red"] 10
+        , Run Memory ["-t", "Mem: <usedratio>%"] 10
+        , Run Date "%F (%a) %T" "date" 10
+        , Run StdinReader
+        , Run Battery ["--template", "Batt:<acstatus>", "-L", "10", "-H", "80"
+            , "--low", "red", "--normal", "orange", "--high", "green", "--"
+            , "-o", "<left>% (<timeleft>)", "-O", "<fc=#dAA520>Charging</fc>"
+            , "-i","<fc=#006000>Charged</fc>"] 50
+        ]
+        , sepChar   =   "%"
+        , alignSep  =   "}{"
+        , template  =   " %StdinReader% }{ %battery% | %multicpu% | %memory% | %enp6s0% | %date%"
+}
