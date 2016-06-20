@@ -1,0 +1,40 @@
+# ~/.conkyrc
+# Arch/Xmonad linux 4.6
+# Author - Gabriel Peixoto
+# 06/11/2016 
+
+background no
+out_to_x no
+out_to_console yes
+update_interval 3
+total_run_times 0
+use_spacer none
+
+# temp, loadavg, cpu usage, cpu freq, battery, network, date
+
+TEXT
+<fc=\#ff0000>Temp ${hwmon temp 1}°</fc> || \
+<fc=\#ffffff>Load: ${loadavg 0}</fc> || \
+<fc=\#0066ff>Cpu: Core1 ${cpu cpu1}% ${freq_g 1} | \
+${cpu cpu2}% ${} ${cpu cpu3} ${freq_g 3}GHz </fc> || \
+<fc=\#00ff00>Mem: ${mem}/${memmax} - ${memperc}% </fc> || \
+${if_existing /sys/class/power_supply/BAT0/present \ 
+${if_match ${battery_percent}>70}} \
+<fc=\#00ff00>${battery_percent}% | (${battery_time BAT0}) </fc> ||\
+${else} \
+${if_match ${battery_percent}>40}} \
+<fc=\#cc8033>${battery_percent}% | (${battery_time BAT0}) </fc> ||\
+${else} \
+${if_match ${battery_percent}>20}} \ 
+<fc=\#cc8033>${battery_percent}% | (${battery_time BAT0}) </fc> ||\
+${else} \
+<fc=\#ff0000>${battery_percent}% | (${battery_time BAT0}) </fc> ||\
+$endif \ 
+$endif \ 
+$endif \
+${else} AC (${battery BAT0})||\
+$endif \
+${if_up enp3s0 ${exec ifconfig  | grep 'inet addr:'}} enp3s0  ${upspeed enp3s0} ${downspeed enp3s0} ${else}\
+<fc=\#ffffff>${wireless_link_qual_perc wlp4s0}% | ${wireless_essid wlp4s0} | \
+${upspeed wlp4s0}| ${downspeed wlp4s0}</fc> ${endif}|| \
+<fc=\#ffffff> ${time %b %d %H:%M}</fc> \                     

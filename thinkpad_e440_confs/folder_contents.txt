@@ -1,0 +1,10 @@
+ This folder contains the base configuration
+ for thinkpad E440, using Xmonad, Dzen2 + conky
+
+ it contains:
+
+ -vimrc
+ -bashrc
+ -xmonad.hs
+ -conkyrc
+ -icon folder

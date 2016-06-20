@@ -1,0 +1,6 @@
+Config { font = "xft:arial:bold:size=9"
+       , bgColor  = "#000000"
+       , fgColor  = "#777777"
+       , commands = [ Run StdinReader, Run Com "cat" ["/home/gaburiero/.xmonad/conkystats"] "conky" 30 ]
+       , template = "%StdinReader% }{ %conky%"
+       }
